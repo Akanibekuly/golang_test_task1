@@ -7,12 +7,12 @@ import (
 )
 
 func SetEndpoints(group *gin.RouterGroup, db *sql.DB) {
-	// handle := NewHnadler(db)
+	handle := NewHandlers(db)
 	{
-		group.GET("/cities")
-		group.POST("/cities")
-		group.GET("/cities/:id")
-		group.PUT("/cities/:id")
-		group.DELETE("/cities/:id")
+		group.GET("/cities", handle.GetCities)
+		group.POST("/cities", handle.CreateCity)
+		group.GET("/cities/:id", handle.GetCity)
+		group.PUT("/cities/:id", handle.UpdateCity)
+		group.DELETE("/cities/:id", handle.DeleteCity)
 	}
 }
