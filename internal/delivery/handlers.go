@@ -102,7 +102,7 @@ func (h *Handler) CreateCity(c *gin.Context) {
 	}
 	c.JSON(http.StatusCreated, &models.ResponseWithData{
 		Status:  "OK",
-		Message: fmt.Sprintf("city with id %d successfully created", id),
+		Message: fmt.Sprintf("city with id %d successfully created", *id),
 	})
 }
 
@@ -181,6 +181,6 @@ func (h *Handler) UpdateCity(c *gin.Context) {
 
 	c.JSON(http.StatusOK, &models.ResponseWithData{
 		Status:  "OK",
-		Message: fmt.Sprintf("city with id %d succesfully deleted", id),
+		Message: fmt.Sprintf("city with id %d succesfully updated", id),
 	})
 }

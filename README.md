@@ -28,3 +28,91 @@ SQLite или PostgreSQL
 
 ## Результат
 Ссылка на репозитории в github.com
+
+1. 
+ * POST http://127.0.0.1:9090/api/v1/cities
+```json
+{
+    "name": "Almaty",
+    "code": "727",
+    "country_code": "02"
+}
+```
+response: 
+```json
+{
+    "status": "OK",
+    "message": "city with id 4 successfully created"
+}
+```
+
+2. 
+* GET http://127.0.0.1:9090/api/v1/cities
+* response:
+```json:
+{
+    "status": "OK",
+    "data": [
+        {
+            "id": 1,
+            "name": "Almaty",
+            "code": "727",
+            "country_code": "02"
+        },
+        {
+            "id": 2,
+            "name": "Almaty",
+            "code": "727",
+            "country_code": "02"
+        },
+        {
+            "id": 3,
+            "name": "Almaty",
+            "code": "727",
+            "country_code": "02"
+        },
+        {
+            "id": 4,
+            "name": "Almaty",
+            "code": "727",
+            "country_code": "02"
+        }
+    ]
+}
+```
+3. GET http://127.0.0.1:9090/api/v1/cities/3
+* response: 
+```json:
+{
+    "status": "OK",
+    "data": {
+        "id": 3,
+        "name": "Almaty",
+        "code": "727",
+        "country_code": "02"
+    }
+}
+```
+5. DELETE http://127.0.0.1:9090/api/v1/cities/4
+* response: 
+```json
+{
+    "status": "OK",
+    "message": "city with id 4 succesfully deleted"
+}
+```
+6. PUT http://127.0.0.1:9090/api/v1/cities/3
+```json
+{
+    "name": "Astana",
+    "code": "7172",
+    "country_code": "01"
+}
+```
+* response: 
+```json
+{
+    "status": "OK",
+    "message": "city with id 3 succesfully deleted"
+}
+```

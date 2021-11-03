@@ -19,7 +19,7 @@ func NewCityRepository(db *sql.DB) *CityRepository {
 }
 
 func (r *CityRepository) GetCities() ([]*models.City, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Millisecond)
 	defer cancel()
 
 	rows, err := r.db.QueryContext(ctx,
@@ -54,7 +54,7 @@ func (r *CityRepository) GetCities() ([]*models.City, error) {
 }
 
 func (r *CityRepository) CreateCity(city *models.City) (*int, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Millisecond)
 	defer cancel()
 	var id int
 	err := r.db.QueryRowContext(ctx,
@@ -66,7 +66,7 @@ func (r *CityRepository) CreateCity(city *models.City) (*int, error) {
 	)
 	VALUES
 	($1,$2,$3)
-	RETURNING id`).Scan(&id)
+	RETURNING id`, city.Name, city.Code, city.CountryCode).Scan(&id)
 	if err != nil {
 		log.Printf("create city: scan repo error: %s\n", err)
 		return nil, err
@@ -75,7 +75,7 @@ func (r *CityRepository) CreateCity(city *models.City) (*int, error) {
 }
 
 func (r *CityRepository) GetCityByID(id int) (*models.City, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Millisecond)
 	defer cancel()
 	var c models.City
 	err := r.db.QueryRowContext(ctx,
@@ -96,7 +96,7 @@ func (r *CityRepository) GetCityByID(id int) (*models.City, error) {
 }
 
 func (r *CityRepository) DeleteCityByID(id int) error {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Millisecond)
 	defer cancel()
 	res, err := r.db.ExecContext(ctx,
 		`DELETE FROM cities
@@ -119,7 +119,7 @@ func (r *CityRepository) DeleteCityByID(id int) error {
 }
 
 func (r *CityRepository) UpdateCityByID(id int, city *models.City) error {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Millisecond)
 	defer cancel()
 	res, err := r.db.ExecContext(ctx,
 		`UPDATE cities 
